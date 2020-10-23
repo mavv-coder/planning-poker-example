@@ -2,9 +2,6 @@
 export const baseApiUrl = process.env.BASE_API_URL;
 export const baseSocketUrl = process.env.BASE_SOCKET_URL;
 
-// TODO we could extract inspecting current URL
-export const appBaseUrl = `${process.env.BASE_URL}`; // at merge to master add /app.html
-
 export const SocketInputMessageTypes = {
   CONNECTION_ESTABLISHED_PLAYER: 'CONNECTION_ESTABLISHED_PLAYER',
   NEW_STORY: 'NEW_STORY',

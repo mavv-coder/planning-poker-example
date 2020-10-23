@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { cx } from 'emotion';
 import * as classes from './master.component.styles';
-import { appBaseUrl } from 'core';
 import { MasterStatus, VoteResult } from './master.vm';
 import { TablePlayerComponent } from 'common-app/components';
 import { CopySessionLinkComponent } from './components/copy-session-link.component';
@@ -11,6 +10,7 @@ import { PlayerVotingStatus } from 'core';
 import { Button } from '@material-ui/core';
 
 interface Props {
+  url: string;
   room: string;
   playerVotingStatus: PlayerVotingStatus[];
   onSetStoryTitle: (title: string) => void;
@@ -24,6 +24,7 @@ interface Props {
 
 export const MasterComponent: React.FC<Props> = props => {
   const {
+    url,
     room,
     playerVotingStatus,
     onSetStoryTitle,
@@ -77,7 +78,7 @@ export const MasterComponent: React.FC<Props> = props => {
     <>
       <div className={classes.container}>
         <div className={cx(classes.containerComponent, classes.leftContainer)}>
-          <CopySessionLinkComponent url={`${appBaseUrl}/#/player/${room}`} />
+          <CopySessionLinkComponent url={url} />
         </div>
 
         {showComponentBasedOnMasterStatus(masterStatus)}

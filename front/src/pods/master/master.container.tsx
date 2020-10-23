@@ -8,6 +8,8 @@ import {
   SocketOuputMessageTypes,
   PlayerVotingStatus,
 } from 'core';
+import { routes } from 'core/router';
+import { getHostBaseUrl } from 'common/global-window';
 import { useParams } from 'react-router-dom';
 import { MasterComponent } from './master.component';
 import { MasterStatus, VoteResult } from './master.vm';
@@ -65,6 +67,10 @@ const usePlayerCollection = () => {
 export const MasterContainer = () => {
   const socketContext = React.useContext(SocketContext);
   const authContext = React.useContext(AuthContext);
+  const [currentSessiontUrl, setCurrentSessiontUrl] = React.useState<string>(
+    ''
+  );
+
   const params = useParams(); // TODO: Type this
   const [room, setRoom] = React.useState('');
   const [masterStatus, SetMasterStatus] = React.useState<MasterStatus>(
@@ -91,6 +97,7 @@ export const MasterContainer = () => {
       isMaster: true,
     });
     socketContext.setSocket(socket);
+    setCurrentSessiontUrl(`${getHostBaseUrl()}#${routes.player(room)}`);
 
     setRoom(room);
 
@@ -181,6 +188,7 @@ export const MasterContainer = () => {
 
   return (
     <MasterComponent
+      url={currentSessiontUrl}
       room={room}
       playerVotingStatus={playerCollection}
       onSetStoryTitle={handleSetStoryTitle}
